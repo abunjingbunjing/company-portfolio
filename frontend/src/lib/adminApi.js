@@ -8,8 +8,7 @@ async function request(path, options = {}) {
   });
 
   if (res.status === 401) {
-    window.location.href = '/admin/login';
-    throw new Error('Not authenticated');
+      throw new Error("Not authenticated");
   }
 
   if (!res.ok) {
@@ -21,6 +20,7 @@ async function request(path, options = {}) {
 }
 
 export const adminApi = {
+  getCurrentUser: () => request("/auth/me"),
   //upload image
   uploadTeamImage: async (file) => {
   const formData = new FormData();

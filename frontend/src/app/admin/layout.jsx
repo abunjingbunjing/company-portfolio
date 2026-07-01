@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import LogoutButton from './LogoutButton';
+import AuthGuard from "@/components/admin/AuthGuard";
 
 export default function AdminLayout({ children }) {
   return (
+    <AuthGuard>
     <div className="flex min-h-screen bg-gray-100">
       <aside className="w-64 bg-gray-900 text-white flex flex-col">
         <div className="p-6 border-b border-gray-700">
@@ -37,5 +39,6 @@ export default function AdminLayout({ children }) {
       </aside>
       <main className="flex-1 p-8 overflow-auto">{children}</main>
     </div>
+    </AuthGuard>
   );
 }
