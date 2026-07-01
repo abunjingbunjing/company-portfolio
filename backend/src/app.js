@@ -18,7 +18,6 @@ const path = require("path");
 const rateLimit = require('express-rate-limit');
 
 const contactLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 10 }); // 10 requests / 15 min
-const loginLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
 
 const allowedOrigins = [
   "http://localhost:3000",
@@ -33,7 +32,7 @@ app.use(
 // image upload end
 
 app.use('/api/contact', contactLimiter);
-app.use('/api/auth/login', loginLimiter);
+
 //rate limit code end
 
 app.use(
