@@ -20,6 +20,11 @@ const rateLimit = require('express-rate-limit');
 const contactLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 10 }); // 10 requests / 15 min
 const loginLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://company-portfolio-kappa-eosin.vercel.app",
+];
+
 // image upload 
 app.use(
   "/uploads",
@@ -31,20 +36,23 @@ app.use('/api/contact', contactLimiter);
 app.use('/api/auth/login', loginLimiter);
 //rate limit code end
 
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://company-portfolio-kappa-eosin.vercel.app"
-];
-
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+      if (!origin) {
+        return callback(null, true);
       }
+
+      if (
+        allowedOrigins.includes(origin) ||
+        origin.endsWith(".vercel.app")
+      ) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
     },
+
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
