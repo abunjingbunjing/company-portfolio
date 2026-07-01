@@ -26,19 +26,22 @@ async function login(req, res) {
   );
 
   // Send the token as an httpOnly cookie so JS in the browser can't read it directly
-  res.cookie('token', token, {
+  res.cookie("token", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: 8 * 60 * 60 * 1000, // 8 hours
+    secure: true,
+    sameSite: "none",
+    maxAge: 8 * 60 * 60 * 1000,
   });
-
+  
   res.json({ message: 'Logged in', user: { id: user.id, email: user.email, role: user.role } });
 }
 
 function logout(req, res) {
-  res.clearCookie('token');
-  res.json({ message: 'Logged out' });
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
 }
 
 function me(req, res) {
