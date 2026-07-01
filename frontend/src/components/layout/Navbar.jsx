@@ -22,7 +22,7 @@ export default function Navbar() {
     <header className="py-6">
       <Container>
 
-        <nav className="flex items-center justify-between">
+        <nav className="flex items-center justify-between gap-6">
         {/* Logo */}
         <Link href="/" className="shrink-0 transition-transform duration-300 hover:scale-105">
         <Image
@@ -35,24 +35,24 @@ export default function Navbar() {
         />
         </Link>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-            <li key={link.name}>
-                <Link
-                href={link.href}
-                className="hover:text-primary transition-colors"
-                >
-                {link.name}
-                </Link>
-            </li>
-            ))}
-        </ul>
+        <div className="hidden lg:flex items-center gap-8">
+            <ul className="flex items-center gap-8">
+                {navLinks.map((link) => (
+                    <li key={link.name}>
+                        <Link
+                            href={link.href}
+                            className="hover:text-primary transition-colors"
+                        >
+                            {link.name}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
 
-        {/* Desktop Button */}
-        <div>
             <Link href="/admin/login">
-            <Button className="hidden lg:block hover:bg-primary hover:text-black shrink-0 transition-transform duration-300 hover:scale-105">Login</Button>
+                <Button className="hover:bg-primary hover:text-black transition-transform duration-300 hover:scale-105">
+                    Login
+                </Button>
             </Link>
         </div>
 
