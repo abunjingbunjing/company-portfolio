@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import LogoutButton from './LogoutButton';
-import AuthGuard from "@/components/admin/AuthGuard";
 
 export default function AdminLayout({ children }) {
   return (

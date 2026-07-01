@@ -4,11 +4,12 @@ export function middleware(request) {
   const token = request.cookies.get("token");
   const pathname = request.nextUrl.pathname;
 
-  // Allow login page without authentication
+  // Allow login page
   if (pathname === "/admin/login") {
     return NextResponse.next();
   }
 
+  // Protect admin pages
   if (!token && pathname.startsWith("/admin")) {
     return NextResponse.redirect(new URL("/admin/login", request.url));
   }
