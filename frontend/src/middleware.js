@@ -1,16 +1,21 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export function middleware(request) {
-  const token = request.cookies.get('token');
-  const isLoginPage = request.nextUrl.pathname === '/admin/login';
+  const token = request.cookies.get("token");
+  const pathname = request.nextUrl.pathname;
 
-  if (!token && !isLoginPage && request.nextUrl.pathname.startsWith('/admin')) {
-    return NextResponse.redirect(new URL('/admin/login', request.url));
+  // Allow login page without authentication
+  if (pathname === "/admin/login") {
+    return NextResponse.next();
+  }
+
+  if (!token && pathname.startsWith("/admin")) {
+    return NextResponse.redirect(new URL("/admin/login", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ["/admin/:path*"],
 };
