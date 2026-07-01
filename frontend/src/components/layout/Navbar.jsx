@@ -52,7 +52,7 @@ export default function Navbar() {
             <div className="hidden lg:block">
                 <Link href="/admin/login">
                     <Button className="hover:bg-primary hover:text-black transition-transform duration-300 hover:scale-105">
-                        Login
+                        Loging
                     </Button>
                 </Link>
             </div>
