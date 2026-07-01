@@ -33,6 +33,7 @@ app.use('/api/auth/login', loginLimiter);
 
 const allowedOrigins = [
   "http://localhost:3000",
+  "https://company-portfolio-kappa-eosin.vercel.app"
 ];
 
 app.use(
