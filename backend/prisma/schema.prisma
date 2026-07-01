@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  role         String   @default("admin")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Service {
+  id              String   @id @default(uuid())
+  title           String
+  description     String
+  iconName        String?  @map("icon_name")
+  iconUrl         String?  @map("icon_url")
+  websiteUrl      String?  @map("website_url")
+  backgroundColor String   @default("gray") @map("background_color")
+  sortOrder       Int      @default(0) @map("sort_order")
+  isActive        Boolean  @default(true) @map("is_active")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+  @@map("services")
+}
+
+model CaseStudy {
+  id               String   @id @default(uuid())
+  title            String
+  shortDescription String   @map("short_description")
+  coverImageUrl    String?  @map("cover_image_url")
+  linkUrl          String?  @map("link_url")
+  tags             String?  @map("tags")
+  sortOrder        Int      @default(0) @map("sort_order")
+  isActive         Boolean  @default(true) @map("is_active")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  @@map("case_studies")
+}
+
+model WorkingProcess {
+  id          String   @id @default(uuid())
+  stepNo      Int      @map("step_no")
+  title       String
+  description String
+  sortOrder   Int      @default(0) @map("sort_order")
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("working_processes")
+}
+
+model TeamMember {
+  id          String   @id @default(uuid())
+  name        String
+  role        String
+  avatarUrl   String?  @map("avatar_url")
+  socialsJson String?  @map("socials_json")
+  sortOrder   Int      @default(0) @map("sort_order")
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("team_members")
+}
+
+model Testimonial {
+  id          String   @id @default(uuid())
+  name        String
+  roleCompany String?  @map("role_company")
+  message     String
+  avatarUrl   String?  @map("avatar_url")
+  rating      Int?
+  sortOrder   Int      @default(0) @map("sort_order")
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("testimonials")
+}
+
+model ContactSubmission {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  message   String
+  status    String   @default("new")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("contact_submissions")
+}
