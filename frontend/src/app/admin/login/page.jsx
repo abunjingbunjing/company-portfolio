@@ -27,9 +27,14 @@ export default function AdminLoginPage() {
         throw new Error(data.error || 'Login failed');
       }
         const data = await res.json();
-        console.log(data);
 
-        alert("Login successful");
+        const me = await fetch(`${API_URL}/auth/me`, {
+          credentials: "include",
+        });
+
+        console.log(await me.json());
+
+        window.location.href = "/admin";
     } catch (err) {
       setError(err.message);
     } finally {
