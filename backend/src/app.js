@@ -24,6 +24,8 @@ const allowedOrigins = [
   "https://company-portfolio-kappa-eosin.vercel.app",
 ];
 
+app.set("trust proxy", 1);
+
 // image upload 
 app.use(
   "/uploads",
