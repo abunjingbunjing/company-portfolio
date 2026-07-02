@@ -42,6 +42,8 @@ function logout(req, res) {
     secure: true,
     sameSite: "none",
   });
+
+  return res.json({ message: "Logged out"});
 }
 
 function me(req, res) {
