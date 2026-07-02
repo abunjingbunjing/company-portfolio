@@ -26,7 +26,10 @@ export default function AdminLoginPage() {
         const data = await res.json();
         throw new Error(data.error || 'Login failed');
       }
-      window.location.href = "/admin";
+        const data = await res.json();
+        console.log(data);
+
+        alert("Login successful");
     } catch (err) {
       setError(err.message);
     } finally {
