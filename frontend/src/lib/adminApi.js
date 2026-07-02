@@ -20,6 +20,7 @@ async function request(path, options = {}) {
 }
 
 export const adminApi = {
+  getCurrentUser: () => request("/auth/me"),
   //upload image
   uploadTeamImage: async (file) => {
   const formData = new FormData();
